@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DogWalk – Admin Panel</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="dashboard-body">
+
+<!-- ===== ADMIN HEADER ===== -->
+<header class="dashboard-header dashboard-header--admin" role="banner">
+    <div class="dashboard-header-inner">
+        <a href="index.html" class="logo" aria-label="DogWalk – Idi na početnu stranicu">DogWalk</a>
+        <span class="admin-chip" aria-label="Administrator panel">
+            <i class="bi bi-shield-lock" aria-hidden="true"></i>
+            Admin Panel
+        </span>
+        <div class="dashboard-header-right">
+            <span class="dashboard-user-chip">
+                <span class="dashboard-user-avatar" aria-hidden="true">AD</span>
+                Administrator
+            </span>
+            <a href="login.html" class="dashboard-logout-btn" aria-label="Odjavi se">
+                <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+                <span class="d-none d-md-inline">Odjavi se</span>
+            </a>
+        </div>
+    </div>
+</header>
+
+<div class="dashboard-layout">
+
+    <!-- ===== SIDEBAR ===== -->
+    <nav class="dashboard-sidebar" role="navigation" aria-label="Admin navigacija">
+        <ul class="sidebar-nav-list" role="list">
+            <li>
+                <a href="#admin-overview" class="sidebar-nav-item sidebar-nav-item--active" aria-current="page">
+                    <i class="bi bi-grid" aria-hidden="true"></i>
+                    <span>Pregled</span>
+                </a>
+            </li>
+            <li>
+                <a href="#admin-walkers" class="sidebar-nav-item">
+                    <i class="bi bi-person-badge" aria-hidden="true"></i>
+                    <span>Šetači</span>
+                    <span class="sidebar-badge sidebar-badge--red" aria-label="2 šetača čeka odobrenje">2</span>
+                </a>
+            </li>
+            <li>
+                <a href="#admin-users" class="sidebar-nav-item">
+                    <i class="bi bi-people" aria-hidden="true"></i>
+                    <span>Korisnici</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ===== MAIN ===== -->
+    <main class="dashboard-main" id="admin-content">
+
+        <!-- ===== OVERVIEW ===== -->
+        <section id="admin-overview" aria-labelledby="admin-overview-heading">
+            <div class="dashboard-section-header">
+                <h1 class="dashboard-section-title" id="admin-overview-heading">Pregled sistema</h1>
+            </div>
+
+            <div class="stat-card-grid" role="list" aria-label="Statistike sistema">
+                <div class="stat-card" role="listitem">
+                    <div class="stat-card-icon" aria-hidden="true"><i class="bi bi-people"></i></div>
+                    <div>
+                        <p class="stat-card-value">128</p>
+                        <p class="stat-card-label">Ukupno korisnika</p>
+                    </div>
+                </div>
+                <div class="stat-card" role="listitem">
+                    <div class="stat-card-icon stat-card-icon--blue" aria-hidden="true"><i class="bi bi-person-badge"></i></div>
+                    <div>
+                        <p class="stat-card-value">34</p>
+                        <p class="stat-card-label">Aktivnih šetača</p>
+                    </div>
+                </div>
+                <div class="stat-card" role="listitem">
+                    <div class="stat-card-icon stat-card-icon--orange" aria-hidden="true"><i class="bi bi-hourglass-split"></i></div>
+                    <div>
+                        <p class="stat-card-value">2</p>
+                        <p class="stat-card-label">Čeka odobrenje</p>
+                    </div>
+                </div>
+                <div class="stat-card" role="listitem">
+                    <div class="stat-card-icon stat-card-icon--yellow" aria-hidden="true"><i class="bi bi-activity"></i></div>
+                    <div>
+                        <p class="stat-card-value">312</p>
+                        <p class="stat-card-label">Ukupno šetnji</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="dashboard-divider" aria-hidden="true">
+
+        <!-- ===== WALKERS MANAGEMENT ===== -->
+        <section id="admin-walkers" aria-labelledby="admin-walkers-heading">
+            <div class="dashboard-section-header">
+                <h2 class="dashboard-section-title" id="admin-walkers-heading">Upravljanje šetačima</h2>
+            </div>
+
+            <!-- Search / filter bar -->
+            <div class="admin-filter-bar" role="search" aria-label="Pretraga i filtriranje šetača">
+                <div class="admin-search-input-wrap">
+                    <i class="bi bi-search" aria-hidden="true"></i>
+                    <input
+                            type="text"
+                            id="walker-search"
+                            class="admin-search-input"
+                            placeholder="Pretraži šetače..."
+                            aria-label="Pretraži šetače po imenu ili e-mailu"
+                    >
+                </div>
+                <select id="walker-status-filter" class="admin-filter-select" aria-label="Filtriraj po statusu">
+                    <option value="">Svi statusi</option>
+                    <option value="pending">Čeka odobrenje</option>
+                    <option value="active">Aktivan</option>
+                    <option value="inactive">Neaktivan</option>
+                </select>
+            </div>
+
+            <!-- Alert for actions -->
+            <div id="walkers-alert" class="auth-alert d-none mb-3" role="alert" aria-live="assertive"></div>
+
+            <!-- Walkers table -->
+            <div class="admin-table-wrap" role="region" aria-label="Tabela šetača" tabindex="0">
+                <table class="admin-table" aria-label="Lista šetača">
+                    <thead>
+                    <tr>
+                        <th scope="col">Šetač</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Ocena</th>
+                        <th scope="col">Šetnje</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Akcije</th>
+                    </tr>
+                    </thead>
+                    <tbody id="walkers-table-body">
+                    <!-- Pending walker -->
+                    <tr class="admin-row admin-row--pending" data-walker-id="10">
+                        <td>
+                            <div class="admin-user-cell">
+                                <div class="admin-user-avatar" aria-hidden="true">MN</div>
+                                <div>
+                                    <p class="admin-user-name">Mila Nikolić</p>
+                                    <p class="admin-user-location">Subotica</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="admin-email">mila.nikolic@email.com</td>
+                        <td>–</td>
+                        <td>0</td>
+                        <td>
+                                <span class="admin-status-badge admin-status-badge--pending" aria-label="Status: Čeka odobrenje">
+                                    <i class="bi bi-hourglass-split" aria-hidden="true"></i>
+                                    Čeka odobrenje
+                                </span>
+                        </td>
+                        <td>
+                            <div class="admin-action-btns" role="group" aria-label="Akcije za Milu Nikolić">
+                                <button
+                                        class="admin-btn admin-btn--approve"
+                                        data-action="approve"
+                                        data-walker-id="10"
+                                        aria-label="Odobri šetača Mila Nikolić"
+                                >
+                                    <i class="bi bi-check-lg" aria-hidden="true"></i>
+                                    Odobri
+                                </button>
+                                <button
+                                        class="admin-btn admin-btn--reject"
+                                        data-action="reject"
+                                        data-walker-id="10"
+                                        aria-label="Odbij šetača Mila Nikolić"
+                                >
+                                    <i class="bi bi-x-lg" aria-hidden="true"></i>
+                                    Odbij
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Pending walker 2 -->
+                    <tr class="admin-row admin-row--pending" data-walker-id="11">
+                        <td>
+                            <div class="admin-user-cell">
+                                <div class="admin-user-avatar" aria-hidden="true">DJ</div>
+                                <div>
+                                    <p class="admin-user-name">Danilo Jovičić</p>
+                                    <p class="admin-user-location">Novi Sad</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="admin-email">danilo.jovicic@email.com</td>
+                        <td>–</td>
+                        <td>0</td>
+                        <td>
+                                <span class="admin-status-badge admin-status-badge--pending" aria-label="Status: Čeka odobrenje">
+                                    <i class="bi bi-hourglass-split" aria-hidden="true"></i>
+                                    Čeka odobrenje
+                                </span>
+                        </td>
+                        <td>
+                            <div class="admin-action-btns" role="group" aria-label="Akcije za Danila Jovičića">
+                                <button class="admin-btn admin-btn--approve" data-action="approve" data-walker-id="11" aria-label="Odobri šetača Danilo Jovičić">
+                                    <i class="bi bi-check-lg" aria-hidden="true"></i> Odobri
+                                </button>
+                                <button class="admin-btn admin-btn--reject" data-action="reject" data-walker-id="11" aria-label="Odbij šetača Danilo Jovičić">
+                                    <i class="bi bi-x-lg" aria-hidden="true"></i> Odbij
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Active walker -->
+                    <tr class="admin-row" data-walker-id="1">
+                        <td>
+                            <div class="admin-user-cell">
+                                <div class="admin-user-avatar" aria-hidden="true">AM</div>
+                                <div>
+                                    <p class="admin-user-name">Ana Marković</p>
+                                    <p class="admin-user-location">Beograd</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="admin-email">ana.markovic@email.com</td>
+                        <td>4.5 ★</td>
+                        <td>47</td>
+                        <td>
+                                <span class="admin-status-badge admin-status-badge--active" aria-label="Status: Aktivan">
+                                    <i class="bi bi-check-circle" aria-hidden="true"></i>
+                                    Aktivan
+                                </span>
+                        </td>
+                        <td>
+                            <div class="admin-action-btns" role="group" aria-label="Akcije za Anu Marković">
+                                <button class="admin-btn admin-btn--deactivate" data-action="deactivate" data-walker-id="1" aria-label="Deaktiviraj šetača Ana Marković">
+                                    <i class="bi bi-slash-circle" aria-hidden="true"></i>
+                                    Deaktiviraj
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Inactive walker -->
+                    <tr class="admin-row admin-row--inactive" data-walker-id="5">
+                        <td>
+                            <div class="admin-user-cell">
+                                <div class="admin-user-avatar" aria-hidden="true">JĐ</div>
+                                <div>
+                                    <p class="admin-user-name">Jelena Đorđević</p>
+                                    <p class="admin-user-location">Kragujevac</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="admin-email">jelena.djordjevic@email.com</td>
+                        <td>3.5 ★</td>
+                        <td>12</td>
+                        <td>
+                                <span class="admin-status-badge admin-status-badge--inactive" aria-label="Status: Neaktivan">
+                                    <i class="bi bi-dash-circle" aria-hidden="true"></i>
+                                    Neaktivan
+                                </span>
+                        </td>
+                        <td>
+                            <div class="admin-action-btns" role="group" aria-label="Akcije za Jelenu Đorđević">
+                                <button class="admin-btn admin-btn--approve" data-action="activate" data-walker-id="5" aria-label="Aktiviraj šetača Jelena Đorđević">
+                                    <i class="bi bi-check-lg" aria-hidden="true"></i>
+                                    Aktiviraj
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <hr class="dashboard-divider" aria-hidden="true">
+
+        <!-- ===== USERS MANAGEMENT ===== -->
+        <section id="admin-users" aria-labelledby="admin-users-heading">
+            <div class="dashboard-section-header">
+                <h2 class="dashboard-section-title" id="admin-users-heading">Upravljanje korisnicima</h2>
+            </div>
+
+            <div class="admin-filter-bar" role="search" aria-label="Pretraga korisnika">
+                <div class="admin-search-input-wrap">
+                    <i class="bi bi-search" aria-hidden="true"></i>
+                    <input
+                            type="text"
+                            id="user-search"
+                            class="admin-search-input"
+                            placeholder="Pretraži korisnike..."
+                            aria-label="Pretraži korisnike"
+                    >
+                </div>
+                <select id="user-status-filter" class="admin-filter-select" aria-label="Filtriraj po statusu">
+                    <option value="">Svi statusi</option>
+                    <option value="active">Aktivan</option>
+                    <option value="locked">Zaključan</option>
+                </select>
+            </div>
+
+            <div id="users-alert" class="auth-alert d-none mb-3" role="alert" aria-live="assertive"></div>
+
+            <div class="admin-table-wrap" role="region" aria-label="Tabela korisnika" tabindex="0">
+                <table class="admin-table" aria-label="Lista korisnika">
+                    <thead>
+                    <tr>
+                        <th scope="col">Korisnik</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Registrovan</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Akcije</th>
+                    </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                    <tr class="admin-row" data-user-id="20">
+                        <td>
+                            <div class="admin-user-cell">
+                                <div class="admin-user-avatar" aria-hidden="true">JM</div>
+                                <div>
+                                    <p class="admin-user-name">Jovana Milić</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="admin-email">jovana.milic@email.com</td>
+                        <td>10. maj 2025.</td>
+                        <td>
+                                <span class="admin-status-badge admin-status-badge--active" aria-label="Status: Aktivan">
+                                    <i class="bi bi-check-circle" aria-hidden="true"></i> Aktivan
+                                </span>
+                        </td>
+                        <td>
+                            <div class="admin-action-btns" role="group" aria-label="Akcije za Jovanu Milić">
+                                <button class="admin-btn admin-btn--deactivate" data-action="lock" data-user-id="20" aria-label="Zaključaj nalog Jovane Milić">
+                                    <i class="bi bi-lock" aria-hidden="true"></i>
+                                    Zaključaj
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="admin-row admin-row--inactive" data-user-id="21">
+                        <td>
+                            <div class="admin-user-cell">
+                                <div class="admin-user-avatar" aria-hidden="true">NS</div>
+                                <div>
+                                    <p class="admin-user-name">Nikola Stanković</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="admin-email">nikola.stankovic@email.com</td>
+                        <td>3. maj 2025.</td>
+                        <td>
+                                <span class="admin-status-badge admin-status-badge--inactive" aria-label="Status: Zaključan">
+                                    <i class="bi bi-lock" aria-hidden="true"></i> Zaključan
+                                </span>
+                        </td>
+                        <td>
+                            <div class="admin-action-btns" role="group" aria-label="Akcije za Nikolu Stankovića">
+                                <button class="admin-btn admin-btn--approve" data-action="unlock" data-user-id="21" aria-label="Otključaj nalog Nikole Stankovića">
+                                    <i class="bi bi-unlock" aria-hidden="true"></i>
+                                    Otključaj
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

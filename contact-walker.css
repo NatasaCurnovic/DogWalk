@@ -1,0 +1,226 @@
+/* ============================================================
+   contact-walker.css – DogWalk
+   Styles for the contact walker form page
+   Naming: kebab-case
+   Colors: hex values only
+   ============================================================ */
+
+/* ===== Breadcrumb ===== */
+.contact-breadcrumb {
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--color-border);
+    padding: 10px 0;
+}
+
+.breadcrumb-list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+}
+
+.breadcrumb-list a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.breadcrumb-list a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-list i {
+    font-size: 0.7rem;
+    color: var(--color-border);
+}
+
+/* ===== Page layout ===== */
+.contact-page {
+    padding: 40px 0 64px;
+    background-color: var(--color-bg);
+    min-height: calc(100vh - 140px);
+}
+
+.contact-layout {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+}
+
+/* ===== Walker summary sidebar ===== */
+.contact-walker-summary {
+    flex: 0 0 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.contact-section-label {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+}
+
+.contact-walker-card {
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    box-shadow: var(--shadow-card);
+}
+
+.contact-walker-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    border: 2px solid var(--color-primary-light);
+}
+
+.contact-walker-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--color-text);
+    margin: 0 0 4px;
+    font-family: var(--font-display);
+}
+
+.contact-walker-location {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Info boxes */
+.contact-info-box {
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 14px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.contact-info-box i {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.contact-info-box p {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.contact-info-box--green {
+    background-color: #f0f7f3;
+    border-color: #c3e6cb;
+}
+
+.contact-info-box--green i {
+    color: var(--color-primary);
+}
+
+.contact-info-box--green p {
+    color: #2d6a4f;
+}
+
+/* ===== Contact form panel ===== */
+.contact-form-panel {
+    flex: 1;
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: 28px;
+    box-shadow: var(--shadow-card);
+}
+
+.contact-form-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 6px;
+}
+
+.contact-form-subtitle {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
+}
+
+/* Fieldset */
+.contact-fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 8px;
+}
+
+.contact-legend {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 16px;
+    padding: 0;
+    display: block;
+    width: 100%;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 8px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 860px) {
+    .contact-layout {
+        flex-direction: column;
+    }
+
+    .contact-walker-summary {
+        flex: 0 0 auto;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .contact-walker-card {
+        flex: 1 1 220px;
+    }
+
+    .contact-info-box {
+        flex: 1 1 180px;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-walker-summary {
+        flex-direction: column;
+    }
+
+    .contact-form-panel {
+        padding: 20px 16px;
+    }
+}
