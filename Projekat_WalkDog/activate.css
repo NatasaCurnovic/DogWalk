@@ -1,0 +1,215 @@
+:root {
+    --color-primary:       #52b788;
+    --color-primary-dark:  #3a9970;
+    --color-primary-light: #74c69d;
+    --font-display:        'Playfair Display', serif;
+    --font-body:           'DM Sans', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: var(--font-body);
+    background-color: #f4f7f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ── Main ── */
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 56px 16px;
+}
+
+/* ── Card ── */
+.act-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 52px 44px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+}
+
+/* ── Icon circle ── */
+.act-icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 28px;
+    transition: background-color 0.3s;
+}
+
+.act-icon-circle--loading {
+    background-color: rgba(82,183,136,0.1);
+    color: var(--color-primary);
+}
+
+.act-icon-circle--success {
+    background-color: rgba(82,183,136,0.12);
+    color: var(--color-primary);
+}
+
+.act-icon-circle--error {
+    background-color: rgba(230,57,70,0.1);
+    color: #e63946;
+}
+
+.act-icon-circle--expired {
+    background-color: rgba(255,159,28,0.1);
+    color: #ff9f1c;
+}
+
+/* ── Title ── */
+.act-title {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+.act-desc {
+    font-size: 0.92rem;
+    color: #6c757d;
+    line-height: 1.65;
+    margin-bottom: 32px;
+}
+
+/* ── Spinner ── */
+.spin {
+    display: inline-block;
+    animation: spinIcon 0.9s linear infinite;
+}
+
+@keyframes spinIcon {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* ── Buttons ── */
+.act-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.25s, transform 0.15s;
+    letter-spacing: 0.2px;
+    width: 100%;
+}
+
+.act-btn:hover  { transform: translateY(-1px); }
+.act-btn:active { transform: translateY(0); }
+
+.act-btn--primary {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+.act-btn--primary:hover { background-color: var(--color-primary-dark); color: #fff; }
+
+.act-btn--outline {
+    background-color: #fff;
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-primary);
+}
+
+.act-btn--outline:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+.act-btn--danger {
+    background-color: #e63946;
+    color: #fff;
+}
+
+.act-btn--danger:hover { background-color: #c1121f; color: #fff; }
+
+/* ── Progress dots (loading state) ── */
+.act-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.act-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    animation: dotPulse 1.4s ease-in-out infinite;
+}
+
+.act-dot:nth-child(2) { animation-delay: 0.2s; }
+.act-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotPulse {
+    0%, 80%, 100% { opacity: 0.2; transform: scale(0.85); }
+    40%            { opacity: 1;   transform: scale(1.1); }
+}
+
+/* ── Divider ── */
+.act-divider {
+    position: relative;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #adb5bd;
+    margin: 20px 0;
+}
+
+.act-divider span {
+    background-color: #fff;
+    padding: 0 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.act-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #e9ecef;
+}
+
+/* ── Token info badge ── */
+.act-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #f0faf4;
+    border: 1px solid #a8d5b5;
+    color: #2d6a4f;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .act-card { padding: 40px 22px; }
+}

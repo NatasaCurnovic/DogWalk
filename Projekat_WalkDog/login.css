@@ -1,0 +1,300 @@
+/* ── CSS varijable ── */
+:root {
+    --color-primary:       #52b788;
+    --color-primary-light: #74c69d;
+    --color-primary-dark:  #3a9970;
+    --color-olive-dark:    #3b4a2f;
+    --color-bg:            #f8f9f4;
+    --color-text:          #1c2b1a;
+    --color-text-muted:    #6c7a6a;
+    --color-border:        #d8e0d4;
+    --font-display:        'Playfair Display', serif;
+    --font-body:           'DM Sans', sans-serif;
+    --transition-smooth:   all 0.25s ease;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+.auth-page {
+    min-height: calc(100vh - 70px);
+    background-color: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+}
+
+.auth-form-box {
+    width: 100%;
+    max-width: 480px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 40px 36px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+
+@media (max-width: 480px) {
+    .auth-form-box {
+        padding: 28px 20px 24px;
+    }
+}
+
+.auth-form-title {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 6px;
+}
+
+.auth-form-subtitle {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: 28px;
+}
+
+.auth-form-subtitle a {
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.auth-form-subtitle a:hover {
+    text-decoration: underline;
+}
+
+/* ── Alert ── */
+.auth-alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.auth-alert--success {
+    background-color: #d4edda;
+    border-color: #a8d5b5;
+    color: #1b4332;
+}
+
+.auth-alert--error {
+    background-color: #fde8e8;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+/* ── Form groups ── */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 6px;
+}
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.label-row label {
+    margin-bottom: 0;
+}
+
+.forgot-link {
+    font-size: 0.8rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.forgot-link:hover { text-decoration: underline; }
+
+.required { color: #e63946; }
+
+.auth-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--color-border);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-text);
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.auth-input:focus {
+    border-color: var(--color-primary-light);
+    box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.18);
+}
+
+.auth-input.is-invalid {
+    border-color: #e63946;
+    box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.12);
+}
+
+.auth-input.is-valid {
+    border-color: var(--color-primary-light);
+}
+
+/* Input with password toggle */
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon .auth-input {
+    padding-right: 44px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 4px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.toggle-password:hover { color: var(--color-primary); }
+
+.field-error {
+    display: block;
+    font-size: 0.78rem;
+    color: #e63946;
+    margin-top: 4px;
+    min-height: 1em;
+}
+
+/* ── Checkbox ── */
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    color: var(--color-text);
+    font-weight: 400;
+}
+
+.checkbox-label input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+/* ── Submit button ── */
+.auth-submit-btn {
+    width: 100%;
+    padding: 12px 24px;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: 0.2px;
+    margin-top: 4px;
+}
+
+.auth-submit-btn:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+}
+
+.auth-submit-btn:active  { transform: translateY(0); }
+
+.auth-submit-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.spin {
+    display: inline-block;
+    animation: spinIcon 0.8s linear infinite;
+}
+
+@keyframes spinIcon {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* ── Divider ── */
+.auth-divider-text {
+    text-align: center;
+    position: relative;
+    margin: 20px 0;
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+}
+
+.auth-divider-text span {
+    background-color: #fff;
+    padding: 0 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-divider-text::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+/* ── Register button ── */
+.auth-register-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 11px 24px;
+    background-color: transparent;
+    border: 1.5px solid var(--color-primary);
+    color: var(--color-primary);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.auth-register-btn:hover {
+    background-color: var(--color-primary);
+    color: #ffffff;
+}
